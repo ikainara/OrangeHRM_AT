@@ -1,3 +1,4 @@
+import annotations.Insert;
 import annotations.Navigate;
 import annotations.OrangeTest;
 import annotations.UseJPWConfig;
@@ -8,9 +9,13 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 
 @UseJPWConfig(OrangeHrmConfig.class)
 public class LoginTest {
+    @Insert
+    LoginPage loginPage;
+    @Insert
+    HomePage homePage;
     @OrangeTest
     @Navigate(LoginPage.class)
-    public void testLoginValidCredentials(LoginPage loginPage, HomePage homePage) {
+    public void testLoginValidCredentials() {
         loginPage.usernameInput().fill("Admin");
         loginPage.passwordInput().fill("admin123");
         loginPage.loginButton().click();
@@ -19,7 +24,7 @@ public class LoginTest {
 
     @OrangeTest
     @Navigate(LoginPage.class)
-    public void testLoginInvalidCredentials(LoginPage loginPage, HomePage homePage) {
+    public void testLoginInvalidCredentials() {
         loginPage.usernameInput().fill("Admin");
         loginPage.passwordInput().fill("admin1234");
         loginPage.loginButton().click();
