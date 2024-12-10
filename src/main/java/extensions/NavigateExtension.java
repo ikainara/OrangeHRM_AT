@@ -2,9 +2,9 @@ package extensions;
 
 import annotations.Navigate;
 import annotations.Url;
+import org.ikainara.jpw.parameterResolvers.PwPageParameterResolver;
+import org.ikainara.jpw.utils.AnnotationUtils;
 import org.junit.jupiter.api.extension.*;
-import parameterResolvers.PwPageParameterResolver;
-import utils.AnnotationUtils;
 
 public class NavigateExtension implements BeforeEachCallback {
 

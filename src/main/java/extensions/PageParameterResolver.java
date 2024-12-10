@@ -2,12 +2,12 @@ package extensions;
 
 import com.microsoft.playwright.Page;
 import lombok.SneakyThrows;
+import org.ikainara.jpw.parameterResolvers.PwPageParameterResolver;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
 import pages.BasePage;
-import parameterResolvers.PwPageParameterResolver;
 
 public class PageParameterResolver implements ParameterResolver {
     @Override

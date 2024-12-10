@@ -1,7 +1,7 @@
-import annotations.Insert;
 import annotations.Navigate;
 import annotations.OrangeTest;
-import annotations.UseJPWConfig;
+import org.ikainara.jpw.annotations.Insert;
+import org.ikainara.jpw.annotations.UseJPWConfig;
 import pages.HomePage;
 import pages.LoginPage;
 
