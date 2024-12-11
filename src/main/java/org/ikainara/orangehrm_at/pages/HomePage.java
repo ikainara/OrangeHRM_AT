@@ -1,4 +1,4 @@
-package pages;
+package org.ikainara.orangehrm_at.pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;

@@ -1,7 +1,7 @@
-package extensions;
+package org.ikainara.orangehrm_at.extensions;
 
-import annotations.Navigate;
-import annotations.Url;
+import org.ikainara.orangehrm_at.annotations.Navigate;
+import org.ikainara.orangehrm_at.annotations.Url;
 import org.ikainara.jpw.parameterResolvers.PwPageParameterResolver;
 import org.ikainara.jpw.utils.AnnotationUtils;
 import org.junit.jupiter.api.extension.*;

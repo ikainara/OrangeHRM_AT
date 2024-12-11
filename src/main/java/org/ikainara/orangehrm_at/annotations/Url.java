@@ -1,4 +1,4 @@
-package annotations;
+package org.ikainara.orangehrm_at.annotations;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

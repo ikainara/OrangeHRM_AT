@@ -1,8 +1,8 @@
-package annotations;
+package org.ikainara.orangehrm_at.annotations;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import extensions.PageParameterResolver;
+import org.ikainara.orangehrm_at.extensions.PageParameterResolver;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

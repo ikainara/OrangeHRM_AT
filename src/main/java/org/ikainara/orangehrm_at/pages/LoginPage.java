@@ -1,6 +1,6 @@
-package pages;
+package org.ikainara.orangehrm_at.pages;
 
-import annotations.Url;
+import org.ikainara.orangehrm_at.annotations.Url;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import lombok.Getter;

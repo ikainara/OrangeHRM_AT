@@ -1,4 +1,4 @@
-package extensions;
+package org.ikainara.orangehrm_at.extensions;
 
 import com.microsoft.playwright.Page;
 import lombok.SneakyThrows;
@@ -7,7 +7,7 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
-import pages.BasePage;
+import org.ikainara.orangehrm_at.pages.BasePage;
 
 public class PageParameterResolver implements ParameterResolver {
     @Override
