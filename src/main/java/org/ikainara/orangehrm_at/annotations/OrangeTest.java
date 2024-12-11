@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-@ExtendWith(PageParameterResolver.class)
+@ExtendWith({PageParameterResolver.class})
 @Test
 public @interface OrangeTest {
 }
