@@ -4,6 +4,8 @@ import org.ikainara.jpw.annotations.Insert;
 import org.ikainara.jpw.annotations.UseJPWConfig;
 import org.ikainara.orangehrm_at.pages.HomePage;
 import org.ikainara.orangehrm_at.pages.LoginPage;
+import org.ikainara.orangehrm_at.users.AdminUser;
+import org.ikainara.orangehrm_at.users.User;
 import org.junit.jupiter.api.Tag;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
@@ -18,8 +20,7 @@ public class LoginTest {
     @Navigate(LoginPage.class)
     @Tag("HRM-001")
     public void testLoginValidCredentials() {
-        loginPage.usernameInput().fill("Admin");
-        loginPage.passwordInput().fill("admin123");
+        loginPage.fillPageFields(new AdminUser());
         loginPage.loginButton().click();
         assertThat(homePage.userMenuLocator()).isVisible();
     }

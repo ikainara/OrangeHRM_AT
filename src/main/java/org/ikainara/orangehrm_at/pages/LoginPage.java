@@ -4,6 +4,7 @@ import org.ikainara.orangehrm_at.annotations.Url;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import lombok.Getter;
+import org.ikainara.orangehrm_at.users.User;
 
 @Getter
 @Url("/")
@@ -17,5 +18,10 @@ public class LoginPage extends BasePage {
         usernameInput = page.locator("[name=username]");
         passwordInput = page.locator("[name=password]");
         loginButton = page.locator("button[type=submit]");
+    }
+
+    public void fillPageFields(User user) {
+        usernameInput.fill(user.getUsername());
+        passwordInput.fill(user.getPassword());
     }
 }
