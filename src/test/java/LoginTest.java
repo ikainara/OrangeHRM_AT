@@ -1,11 +1,11 @@
-import org.ikainara.orangehrm_at.annotations.Navigate;
-import org.ikainara.orangehrm_at.annotations.OrangeTest;
 import org.ikainara.jpw.annotations.Insert;
 import org.ikainara.jpw.annotations.UseJPWConfig;
+import org.ikainara.orangehrm_at.OrangeHrmConfig;
+import org.ikainara.orangehrm_at.annotations.Navigate;
+import org.ikainara.orangehrm_at.annotations.OrangeTest;
 import org.ikainara.orangehrm_at.pages.HomePage;
 import org.ikainara.orangehrm_at.pages.LoginPage;
 import org.ikainara.orangehrm_at.users.AdminUser;
-import org.ikainara.orangehrm_at.users.User;
 import org.junit.jupiter.api.Tag;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
