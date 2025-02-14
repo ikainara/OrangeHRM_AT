@@ -2,12 +2,13 @@ package org.ikainara.orangehrm_at.models.buzz;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.ikainara.orangehrm_at.models.DataObject;
 
 import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class Buzz {
+public class Buzz implements DataObject {
     private Integer id;
     private Post post;
     private String type;

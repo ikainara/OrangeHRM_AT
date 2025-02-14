@@ -22,6 +22,7 @@
         <jsoup.version>1.17.2</jsoup.version>
         <assertj.version>3.27.2</assertj.version>
         <log4j.version>2.20.0</log4j.version>
+        <manifold.version>2024.1.51</manifold.version>
     </properties>
 
     <dependencyManagement>
@@ -104,24 +105,74 @@
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>${log4j.version}</version>
         </dependency>
+        <dependency>
+            <groupId>systems.manifold</groupId>
+            <artifactId>manifold-ext-rt</artifactId>
+            <version>${manifold.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>systems.manifold</groupId>
+            <artifactId>manifold-rt</artifactId>
+            <version>${manifold.version}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
-    <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.2.3</version>
-        <configuration>
-            <argLine>
-                -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-            </argLine>
-        </configuration>
-        <dependencies>
-            <dependency>
-                <groupId>org.aspectj</groupId>
-                <artifactId>aspectjweaver</artifactId>
-                <version>${aspectj.version}</version>
-            </dependency>
-        </dependencies>
-    </plugin>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.2.3</version>
+            <configuration>
+                <argLine>
+                    -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                </argLine>
+            </configuration>
+            <dependencies>
+                <dependency>
+                    <groupId>org.aspectj</groupId>
+                    <artifactId>aspectjweaver</artifactId>
+                    <version>${aspectj.version}</version>
+                </dependency>
+            </dependencies>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+            <configuration>
+                <encoding>${project.build.sourceEncoding}</encoding>
+                <source>${maven.compiler.source}</source>
+                <target>${maven.compiler.target}</target>
+                <compilerId>javac-with-manifold</compilerId>
+                <compilerArgs>
+                    <arg>-Xplugin:Manifold</arg>
+                </compilerArgs>
+                <annotationProcessorPaths>
+                    <path>
+                        <groupId>systems.manifold</groupId>
+                        <artifactId>manifold-ext</artifactId>
+                        <version>${manifold.version}</version>
+                    </path>
+                    <path>
+                        <groupId>systems.manifold</groupId>
+                        <artifactId>manifold-strings</artifactId>
+                        <version>${manifold.version}</version>
+                    </path>
+                    <path>
+                        <groupId>systems.manifold</groupId>
+                        <artifactId>manifold-exceptions</artifactId>
+                        <version>${manifold.version}</version>
+                    </path>
+                    <path>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                        <version>${lombok.version}</version>
+                    </path>
+                </annotationProcessorPaths>
+            </configuration>
+        </plugin>
+
+    </plugins>
 
 </project>

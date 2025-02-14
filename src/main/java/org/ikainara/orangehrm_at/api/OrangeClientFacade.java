@@ -2,7 +2,9 @@ package org.ikainara.orangehrm_at.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
+import org.ikainara.orangehrm_at.models.ApiResponse;
 import org.ikainara.orangehrm_at.models.buzz.BuzzFeed;
+import org.ikainara.orangehrm_at.models.user.UserList;
 import org.ikainara.orangehrm_at.users.User;
 import org.jsoup.Jsoup;
 import retrofit2.Response;
@@ -36,11 +38,17 @@ public class OrangeClientFacade {
         return client.getBuzzFeed(defaultQueryMap()).execute();
     }
 
+    @SneakyThrows
+    public Response<UserList> getUsers(User user) {
+        var client = authenticate(user);
+        return client.getUsers(defaultQueryMap()).execute();
+    }
+
     private Map<String, String> defaultQueryMap() {
         return Map.of("limit","10",
-                "offset","0",
-                "sortOrder","DESC",
-                "sortField","share.createdAtUtc");
+                "offset","0"
+                /*"sortOrder","DESC",
+                "sortField","share.createdAtUtc"*/);
     }
 
 

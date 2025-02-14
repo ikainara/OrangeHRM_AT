@@ -5,9 +5,9 @@ import com.microsoft.playwright.Page;
 import lombok.Getter;
 
 @Getter
-public class HomePage extends BasePage {
+public class DashboardPage extends BasePage {
 private final Locator userMenuLocator;
-    public HomePage(Page page) {
+    public DashboardPage(Page page) {
         super(page);
         userMenuLocator = page.locator(".oxd-topbar-header-userarea");
     }
