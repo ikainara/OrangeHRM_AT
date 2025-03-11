@@ -12,17 +12,19 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class OrangeClientFactory {
-    private final static HrmConfig config = ConfigCache.getOrCreate(org.ikainara.orangehrm_at.HrmConfig.class);
+    private final HrmConfig config = ConfigCache.getOrCreate(org.ikainara.orangehrm_at.HrmConfig.class);
     private static final HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(log::info);
-    private static final OrangeCookieJar cookieJar = new OrangeCookieJar();
+    private final OrangeCookieJar cookieJar = new OrangeCookieJar();
+    private OkHttpClient.Builder okHttpClientBuilder;
 
     static {
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
     }
 
-    public static OrangeClient createAuthClient() {
+    public OrangeClient createAuthClient() {
         var loginInterceptor = new LoginInterceptor();
-        var okHttpClientBuilder = baseClientBuilder().addInterceptor(loginInterceptor).cookieJar(cookieJar);
+        okHttpClientBuilder = baseClientBuilder();
+        okHttpClientBuilder.addInterceptor(loginInterceptor).cookieJar(cookieJar);
         var authClient = new Retrofit.Builder()
                 .baseUrl(config.authUrl())
                 .client(okHttpClientBuilder.build())
@@ -30,8 +32,7 @@ public class OrangeClientFactory {
         return authClient.create(OrangeClient.class);
     }
 
-    public static OrangeClient createApiClient() {
-        var okHttpClientBuilder = baseClientBuilder().cookieJar(cookieJar);
+    public OrangeClient createApiClient() {
         var apiClient = new Retrofit.Builder()
                 .baseUrl(config.apiUrl())
                 .client(okHttpClientBuilder.build())
@@ -40,7 +41,7 @@ public class OrangeClientFactory {
         return apiClient.create(OrangeClient.class);
     }
 
-    private static OkHttpClient.Builder baseClientBuilder() {
+    private OkHttpClient.Builder baseClientBuilder() {
         return new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .connectTimeout(60, TimeUnit.SECONDS)
