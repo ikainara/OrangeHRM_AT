@@ -39,6 +39,13 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.ikainara</groupId>
+            <artifactId>JPW</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${env.JPW_LOCATION}/jpw.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>com.microsoft.playwright</groupId>
             <artifactId>playwright</artifactId>
             <version>${playwright.version}</version>

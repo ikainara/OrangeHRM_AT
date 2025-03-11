@@ -13,24 +13,7 @@ import java.util.Map;
 
 public class OrangeClientFacade {
     OrangeClient authClient;
-    @SneakyThrows
-    private String getToken() {
-        authClient = OrangeClientFactory.createAuthClient();
-        var response = authClient.getLoginToken().execute();
-        assert response.isSuccessful();
-        var doc = Jsoup.parse(response.body().string());
-        var token = doc.select("#app auth-login").attr(":token");
-        return token.substring(1, token.length()-1);
-    }
-
-    @SneakyThrows
-    private OrangeClient authenticate(User user) {
-        var request = new ObjectMapper().convertValue(user, Map.class);
-        request.put("_token", getToken());
-        var response = authClient.login(request).execute();
-        assert response.isSuccessful() : response.errorBody().string();
-        return OrangeClientFactory.createApiClient();
-    }
+    OrangeClientFactory clientFactory = new OrangeClientFactory();
 
     @SneakyThrows
     public Response<BuzzFeed> getBuzzFeed(User user) {
@@ -44,12 +27,29 @@ public class OrangeClientFacade {
         return client.getUsers(defaultQueryMap()).execute();
     }
 
+    @SneakyThrows
+    private String getToken() {
+        authClient = clientFactory.createAuthClient();
+        var response = authClient.getLoginToken().execute();
+        assert response.isSuccessful();
+        var doc = Jsoup.parse(response.body().string());
+        var token = doc.select("#app auth-login").attr(":token");
+        return token.substring(1, token.length()-1);
+    }
+
+    @SneakyThrows
+    private OrangeClient authenticate(User user) {
+        var request = new ObjectMapper().convertValue(user, Map.class);
+        request.put("_token", getToken());
+        var response = authClient.login(request).execute();
+        assert response.isSuccessful() : response.errorBody().string();
+        return clientFactory.createApiClient();
+    }
+
     private Map<String, String> defaultQueryMap() {
         return Map.of("limit","10",
                 "offset","0"
                 /*"sortOrder","DESC",
                 "sortField","share.createdAtUtc"*/);
     }
-
-
 }
