@@ -5,8 +5,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import org.aeonbits.owner.ConfigCache;
 import org.ikainara.orangehrm_at.HrmConfig;
+import org.ikainara.orangehrm_at.api.customResponseConverter.CustomConverterFactory;
 import retrofit2.Retrofit;
-import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -14,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 public class OrangeClientFactory {
     private final HrmConfig config = ConfigCache.getOrCreate(org.ikainara.orangehrm_at.HrmConfig.class);
     private static final HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(log::info);
-    private final OrangeCookieJar cookieJar = new OrangeCookieJar();
     private OkHttpClient.Builder okHttpClientBuilder;
 
     static {
@@ -23,6 +22,7 @@ public class OrangeClientFactory {
 
     public OrangeClient createAuthClient() {
         var loginInterceptor = new LoginInterceptor();
+        var cookieJar = new OrangeCookieJar();
         okHttpClientBuilder = baseClientBuilder();
         okHttpClientBuilder.addInterceptor(loginInterceptor).cookieJar(cookieJar);
         var authClient = new Retrofit.Builder()
@@ -36,7 +36,7 @@ public class OrangeClientFactory {
         var apiClient = new Retrofit.Builder()
                 .baseUrl(config.apiUrl())
                 .client(okHttpClientBuilder.build())
-                .addConverterFactory(JacksonConverterFactory.create())
+                .addConverterFactory(CustomConverterFactory.create())
                 .build();
         return apiClient.create(OrangeClient.class);
     }

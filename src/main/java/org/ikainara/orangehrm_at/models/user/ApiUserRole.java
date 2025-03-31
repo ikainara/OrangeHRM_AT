@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class UserRole {
+public class ApiUserRole {
     private Integer id;
     private String name, displayName;
 }

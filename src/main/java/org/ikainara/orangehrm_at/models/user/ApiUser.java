@@ -1,16 +1,20 @@
 package org.ikainara.orangehrm_at.models.user;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.ikainara.orangehrm_at.models.DataObject;
-import org.ikainara.orangehrm_at.models.buzz.Employee;
+import lombok.experimental.SuperBuilder;
+import org.ikainara.orangehrm_at.models.employee.ApiEmployee;
 
+@SuperBuilder
 @Data
 @NoArgsConstructor
-public class ApiUser implements DataObject {
-    private Integer id;
-    private String userName;
-    private Boolean deleted, status;
-    private Employee employee;
-    private UserRole userRole;
+@AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ApiUser extends PostUser {
+    Integer id;
+    Boolean deleted;
+    ApiEmployee employee;
+    ApiUserRole userRole;
 }

@@ -1,4 +1,4 @@
-package org.ikainara.orangehrm_at.models.buzz;
+package org.ikainara.orangehrm_at.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -2,19 +2,19 @@ package org.ikainara.orangehrm_at.models.buzz;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.ikainara.orangehrm_at.models.DataObject;
+import org.ikainara.orangehrm_at.models.employee.ApiEmployee;
 
 import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class Buzz implements DataObject {
+public class ApiBuzz {
     private Integer id;
     private Post post;
     private String type;
     private Boolean liked;
     private String text;
-    private Employee employee;
+    private ApiEmployee employee;
     private Statistic stats;
     private String createdDate;
     private String createdTime;
