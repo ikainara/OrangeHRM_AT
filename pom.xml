@@ -23,6 +23,7 @@
         <assertj.version>3.27.2</assertj.version>
         <log4j.version>2.20.0</log4j.version>
         <manifold.version>2024.1.51</manifold.version>
+        <jpw.path>${env.JPW_LOCATION}</jpw.path>
     </properties>
 
     <dependencyManagement>
@@ -43,7 +44,7 @@
             <artifactId>JPW</artifactId>
             <version>1.0</version>
             <scope>system</scope>
-            <systemPath>${env.JPW_LOCATION}/jpw.jar</systemPath>
+            <systemPath>${jpw.path}/jpw.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.microsoft.playwright</groupId>
