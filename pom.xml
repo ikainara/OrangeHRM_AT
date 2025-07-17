@@ -151,7 +151,6 @@
                 <encoding>${project.build.sourceEncoding}</encoding>
                 <source>${maven.compiler.source}</source>
                 <target>${maven.compiler.target}</target>
-                <compilerId>javac-with-manifold</compilerId>
                 <compilerArgs>
                     <arg>-Xplugin:Manifold</arg>
                 </compilerArgs>
